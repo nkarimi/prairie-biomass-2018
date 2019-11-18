@@ -1,23 +1,23 @@
 library(magrittr)
 
 spp.prob.2017 <- gsub('_', ' ', spp.prob.2017, fixed = T)
-
+#Chnaged the variables below based on the spreadsheet:NVDIScriptTranslations
 vars.productivity <- c('biomass.monocultures',
-                                        'pNDVIvalues',
-                                        'pGNDVIvalues',
-                                        'pGDVI2values',
-                                        'pNIRvalues',
-                                        'pREGvalues',
-                                        'pREDvalues',
-                                        'pGREvalues')
+                                        'NDVI',
+                                        'GNDVI',
+                                        'GDVI2',
+                                        'NIR',
+                                        'REG',
+                                        'RED',
+                                        'GRE')
 labels.productivity <- c('Biomass',
                               'NDVI',
                               'GNDVI',
                               'GDVI2',
-                              'pNIR',
-                              'pREG',
-                              'pRED',
-                              'pGRE')
+                              'NIR',
+                              'REG',
+                              'RED',
+                              'GRE')
 
 labels.traits.continuous <- c("Seed mass", "Leaf dry matter content", "SLA",
                               "Leaf N content", "Leaf C content", "Leaf P content",
@@ -28,6 +28,7 @@ labels.traits.continuous <- c("Seed mass", "Leaf dry matter content", "SLA",
 labels.traits.use <- c(labels.traits.continuous[-length(labels.traits.continuous)],
                        "Photosynthetic pathway", "Rhizomes",
                        "N-fixer", "Genome size")
+prairie.mono -> all.prairie
 
 all.prairie.spl <- split(all.prairie, all.prairie$monoTreeName) ##changed ndvi.mat to all.prairie to complie with 01.compileData.R
 all.prairie.mean <- sapply(all.prairie.spl, function(x) {
@@ -36,7 +37,8 @@ all.prairie.mean <- sapply(all.prairie.spl, function(x) {
   t %>%
   as.data.frame
 
-all.prairie.small <- all.prairie.mean[vars.productivity]
+# ERROR: var.productivity as above not found in all.prairie.mean matrix:
+all.prairie.small <- all.prairie.mean[vars.productivity][vars.productivity]
 
 names(all.prairie.small) <- labels.productivity
 
